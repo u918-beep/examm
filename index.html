@@ -1,555 +1,121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>اختبار الحاسوب | الخامس الإعدادي (مدرسة السيّاب)</title>
-  <style>
-    :root{
-      --bg:#0b0d10; --card:#11151b; --line:#1e2631; --muted:#93a4b8;
-      --text:#e9eef5; --accent:#c6ccd6; --good:#7ddc8a; --bad:#ff7b7b;
-      --r:18px; --shadow: 0 12px 30px rgba(0,0,0,.45);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family: system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;
-      background: radial-gradient(1200px 600px at 80% -10%, rgba(198,204,214,.12), transparent 55%),
-                  radial-gradient(900px 450px at 10% 0%, rgba(124,135,150,.10), transparent 55%),
-                  var(--bg);
-      color:var(--text);
-    }
-    a{color:inherit; text-decoration:none}
-    header{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter: blur(10px);
-      background: rgba(11,13,16,.72);
-      border-bottom:1px solid rgba(30,38,49,.7);
-    }
-    .wrap{max-width:1100px; margin:0 auto; padding:22px}
-    .nav{display:flex; align-items:center; justify-content:space-between; gap:14px}
-    .brand{display:flex; align-items:center; gap:10px; padding:12px 0}
-    .logo{
-      width:38px; height:38px; border-radius:12px;
-      background: linear-gradient(135deg, rgba(198,204,214,.22), rgba(124,135,150,.18));
-      border:1px solid rgba(198,204,214,.22);
-      box-shadow: var(--shadow);
-    }
-    .brand h1{font-size:15px; margin:0}
-    .brand p{margin:0; font-size:12px; color:var(--muted)}
-    .pill{
-      padding:10px 12px; border:1px solid rgba(30,38,49,.9);
-      background: rgba(17,21,27,.65); border-radius:999px;
-      font-size:13px; color:var(--accent);
-      transition:.2s ease;
-    }
-    .pill:hover{transform:translateY(-1px); border-color: rgba(198,204,214,.25)}
-    .grid{display:grid; grid-template-columns: 1.15fr .85fr; gap:16px; align-items:start}
-    @media (max-width: 920px){ .grid{grid-template-columns:1fr} }
-    .card{
-      background: linear-gradient(180deg, rgba(17,21,27,.85), rgba(17,21,27,.60));
-      border:1px solid rgba(30,38,49,.9);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      padding:18px;
-    }
-    .headline{font-size:28px; margin:0 0 8px; line-height:1.2}
-    .sub{color:var(--muted); margin:0 0 14px; font-size:14px; line-height:1.9}
-    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-    .btn{
-      border-radius: 14px; padding:12px 14px;
-      border:1px solid rgba(198,204,214,.22);
-      background: rgba(198,204,214,.10);
-      color:var(--text);
-      cursor:pointer; font-weight:800;
-      transition:.2s ease;
-    }
-    .btn:hover{transform: translateY(-1px); background: rgba(198,204,214,.14)}
-    .btn.secondary{
-      border-color: rgba(30,38,49,.9);
-      background: rgba(17,21,27,.55);
-      color: var(--accent);
-    }
-    .tag{
-      display:inline-flex; align-items:center; gap:8px;
-      border:1px solid rgba(30,38,49,.9);
-      background: rgba(11,13,16,.25);
-      padding:8px 10px;
-      border-radius:999px;
-      color: var(--accent);
-      font-size:12px;
-    }
-    .meta{display:grid; grid-template-columns: repeat(4,1fr); gap:10px; margin-top:14px}
-    @media (max-width: 560px){ .meta{grid-template-columns:1fr 1fr} }
-    .mini{
-      padding:12px; border-radius: 16px;
-      border:1px solid rgba(30,38,49,.9);
-      background: rgba(11,13,16,.25);
-    }
-    .mini b{display:block; font-size:15px; margin-bottom:4px}
-    .mini span{color:var(--muted); font-size:12px}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار الحاسوب - الخامس الإعدادي</title>
 
-    .q{
-      border:1px solid rgba(30,38,49,.9);
-      background: rgba(11,13,16,.22);
-      border-radius: 16px;
-      padding:14px;
-      margin-top:12px;
-    }
-    .qTop{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
-    .q h3{margin:0 0 10px; font-size:15px}
-    .chip{
-      font-size:12px;
-      color: var(--accent);
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(30,38,49,.9);
-      background: rgba(17,21,27,.35);
-    }
-    .opts{display:grid; gap:8px}
-    label{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:10px 10px;
-      border-radius: 14px;
-      border:1px solid rgba(30,38,49,.9);
-      background: rgba(17,21,27,.38);
-      cursor:pointer;
-      transition:.15s ease;
-    }
-    label:hover{transform:translateY(-1px); border-color: rgba(198,204,214,.18)}
-    input[type="radio"]{margin-top:4px}
-    .feedback{
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(30,38,49,.9);
-      background: rgba(11,13,16,.25);
-      color: var(--muted);
-      display:none;
-    }
-    .ok{color:var(--good); font-weight:900}
-    .no{color:var(--bad); font-weight:900}
-
-    .result{
-      display:none;
-      margin-top:12px;
-      border-radius: 16px;
-      padding:14px;
-      border:1px solid rgba(30,38,49,.9);
-      background: rgba(11,13,16,.25);
-    }
-    .score{font-size:22px; margin:0 0 6px}
-    .list{margin:8px 0 0; padding:0 18px; color:var(--muted); line-height:1.9}
-    .footer{color:var(--muted); border-top:1px solid rgba(30,38,49,.7); margin-top:18px; padding-top:14px; font-size:13px}
-    .inp{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(30,38,49,.9);
-      background: rgba(11,13,16,.25);
-      color: var(--text);
-      outline:none;
-    }
-    select.inp{cursor:pointer}
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 12px;
-      padding: 2px 6px;
-      border-radius: 8px;
-      border: 1px solid rgba(30,38,49,.9);
-      background: rgba(11,13,16,.35);
-      color: var(--accent);
-    }
-
-    /* ===== شهادة ===== */
-    .cert{
-      display:none;
-      margin-top:16px;
-      padding:18px;
-      border-radius: 18px;
-      border:1px solid rgba(198,204,214,.22);
-      background: linear-gradient(180deg, rgba(198,204,214,.10), rgba(17,21,27,.55));
-      box-shadow: var(--shadow);
-    }
-    .certTop{
-      display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
-      border-bottom:1px dashed rgba(198,204,214,.22);
-      padding-bottom:10px; margin-bottom:12px;
-    }
-    .certTitle{margin:0; font-size:18px}
-    .certBody{color:var(--accent); line-height:2; font-size:14px}
-    .certGrid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px}
-    @media (max-width: 680px){ .certGrid{grid-template-columns:1fr} }
-    .certBox{
-      border:1px solid rgba(30,38,49,.9);
-      background: rgba(11,13,16,.25);
-      border-radius: 14px;
-      padding:12px;
-      color: var(--text);
-    }
-    .sigRow{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-top:14px}
-    .sig{
-      width:220px;
-      border-top:1px solid rgba(198,204,214,.22);
-      padding-top:8px;
-      color: var(--muted);
-      font-size:12px;
-      text-align:center;
-    }
-
-    @media print{
-      header, .noPrint {display:none !important}
-      body{background:#fff; color:#000}
-      .card, .q, .cert{box-shadow:none}
-      .cert{display:block !important}
-    }
-  </style>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#111;
+  color:#fff;
+  padding:20px;
+}
+.container{
+  max-width:800px;
+  margin:auto;
+}
+.question{
+  background:#1e1e1e;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:10px;
+}
+button{
+  padding:10px 20px;
+  font-size:16px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  background:#4CAF50;
+  color:white;
+}
+.result{
+  margin-top:20px;
+  font-size:20px;
+  font-weight:bold;
+}
+</style>
 </head>
 
 <body>
-<header>
-  <div class="wrap nav">
-    <div class="brand">
-      <div class="logo" aria-hidden="true"></div>
-      <div>
-        <h1>اختبار الحاسوب — الخامس الإعدادي</h1>
-        <p>مدرسة السيّاب | 50 سؤال | تصحيح تلقائي + شهادة</p>
-      </div>
-    </div>
-    <nav class="row noPrint" aria-label="روابط">
-      <a class="pill" href="#quiz">الأسئلة</a>
-      <a class="pill" href="#result">النتيجة</a>
-      <a class="pill" href="#certificate">الشهادة</a>
-    </nav>
-  </div>
-</header>
 
-<main class="wrap">
-  <section class="grid">
-    <div class="card">
-      <h2 class="headline">اختبار شامل (وحدة 1 + وحدة 2)</h2>
-      <p class="sub">
-        جاوب كل الأسئلة وبعدين اضغط <span class="kbd">عرض النتيجة</span>.
-        راح تظهر النتيجة + تقرير + <span class="kbd">شهادة</span> قابلة للطباعة PDF.
-      </p>
+<div class="container">
+<h1>اختبار الحاسوب</h1>
+<p>الصف الخامس الإعدادي - مدرسة السياب</p>
 
-      <div class="row noPrint">
-        <span class="tag">✅ تصحيح تلقائي</span>
-        <span class="tag">🏅 شهادة بعد النتيجة</span>
-        <span class="tag">🖨️ طباعة/PDF</span>
-      </div>
+<div id="quiz"></div>
 
-      <div class="meta">
-        <div class="mini"><b id="qCount">0</b><span>عدد الأسئلة</span></div>
-        <div class="mini"><b id="answered">0</b><span>تمت الإجابة</span></div>
-        <div class="mini"><b id="remain">0</b><span>المتبقي</span></div>
-        <div class="mini"><b id="timeHint">15–25</b><span>وقت مقترح (دقيقة)</span></div>
-      </div>
+<button onclick="submitQuiz()">عرض النتيجة</button>
 
-      <div class="row noPrint" style="margin-top:14px">
-        <button class="btn" id="submitBtn">عرض النتيجة</button>
-        <button class="btn secondary" id="resetBtn">إعادة المحاولة</button>
-        <button class="btn secondary" id="printBtn">طباعة / PDF</button>
-      </div>
-
-      <div class="result" id="resultBox" aria-live="polite">
-        <p class="score" id="scoreLine">درجتك: —</p>
-        <p class="sub" id="msgLine" style="margin:0"></p>
-        <ul class="list" id="detailList"></ul>
-      </div>
-
-      <!-- ===== الشهادة ===== -->
-      <div class="cert" id="certBox">
-        <div class="certTop">
-          <h3 class="certTitle">🏅 شهادة إنجاز</h3>
-          <div class="tag" id="certDate">—</div>
-        </div>
-
-        <div class="certBody">
-          نشهد بأن الطالب/ـة <b id="certName">—</b> قد أكمل اختبار مادة الحاسوب للصف الخامس الإعدادي
-          بنجاح، وحصل على:
-        </div>
-
-        <div class="certGrid">
-          <div class="certBox">
-            <div style="color:var(--muted); font-size:12px">الدرجة</div>
-            <div style="font-size:20px; font-weight:900" id="certScore">—</div>
-          </div>
-          <div class="certBox">
-            <div style="color:var(--muted); font-size:12px">النسبة</div>
-            <div style="font-size:20px; font-weight:900" id="certPercent">—</div>
-          </div>
-        </div>
-
-        <div class="sigRow">
-          <div class="sig">توقيع مدرس المادة</div>
-          <div class="sig">ختم المدرسة</div>
-          <div class="sig">مدرسة السيّاب</div>
-        </div>
-      </div>
-
-      <p class="footer" id="result">
-        ملاحظة للأستاذ: الموقع يحتوي تصحيح تلقائي + تقرير إجابات + شهادة قابلة للطباعة.
-      </p>
-    </div>
-
-    <aside class="card noPrint">
-      <h3 style="margin:0 0 8px">بيانات الطالب + الفلترة</h3>
-
-      <label style="display:block; border:none; background:transparent; padding:0; cursor:default">
-        <span style="display:block; color:var(--muted); font-size:12px; margin-bottom:6px">اسم الطالب</span>
-        <input class="inp" id="studentName" placeholder="اكتب اسمك هنا" />
-      </label>
-
-      <div style="height:10px"></div>
-
-      <label style="display:block; border:none; background:transparent; padding:0; cursor:default">
-        <span style="display:block; color:var(--muted); font-size:12px; margin-bottom:6px">اختر الوحدة</span>
-        <select class="inp" id="unitFilter">
-          <option value="all">الكل (50 سؤال)</option>
-          <option value="U1">الوحدة الأولى: الأجهزة الذكية + IOT</option>
-          <option value="U2">الوحدة الثانية: Excel</option>
-        </select>
-      </label>
-
-      <div style="height:10px"></div>
-
-      <label style="display:block; border:none; background:transparent; padding:0; cursor:default">
-        <span style="display:block; color:var(--muted); font-size:12px; margin-bottom:6px">عدد الأسئلة</span>
-        <select class="inp" id="countFilter">
-          <option value="50">50 (كامل)</option>
-          <option value="30">30</option>
-          <option value="20">20</option>
-          <option value="10">10 (تجربة)</option>
-        </select>
-      </label>
-
-      <div style="height:12px"></div>
-
-      <div class="row">
-        <button class="btn secondary" id="applyBtn">تطبيق الفلتر</button>
-      </div>
-
-      <p class="sub" style="margin-top:12px">
-        حتى تعجب الأستاذ: اكتب اسمك، حل الاختبار كامل، واطبع (النتيجة + الشهادة) PDF.
-      </p>
-    </aside>
-  </section>
-
-  <section id="quiz" class="card" style="margin-top:16px">
-    <h3 style="margin:0 0 6px">الأسئلة</h3>
-    <p class="sub">اختر الإجابة الصحيحة لكل سؤال:</p>
-    <div id="questions"></div>
-  </section>
-
-  <section id="certificate" style="margin-top:16px"></section>
-</main>
+<div class="result" id="result"></div>
+</div>
 
 <script>
-  const BANK = [
-    // U1
-    {unit:"U1", q:"متى يُعد الجهاز الإلكتروني جهازًا ذكيًا؟", c:["إذا كان حجمه صغيرًا فقط","إذا احتوى خصائص مثل التفاعل والارتباط وتعدد الوظائف","إذا كان يعمل بالبطارية فقط","إذا كان غالي السعر"], a:1},
-    {unit:"U1", q:"أي مما يلي يُعبّر عن قابلية التفاعل في الأجهزة الذكية؟", c:["عرض صورة ثابتة فقط","إمكانية استجابة الجهاز لأوامر المستخدم عبر واجهة مناسبة","عدم الاتصال بالإنترنت إطلاقًا","عدم دعم التطبيقات"], a:1},
-    {unit:"U1", q:"قابلية الارتباط في الجهاز الذكي تعني:", c:["الاتصال بالأجهزة الأخرى عبر الإنترنت لمشاركة البيانات","زيادة حجم الجهاز","تقليل سعة التخزين","تشغيل الألعاب فقط"], a:0},
-    {unit:"U1", q:"تعدد الوظائف في الجهاز الذكي يعني:", c:["وظيفة واحدة فقط","جمع وظائف متعددة داخل جهاز واحد","عدم وجود كاميرا","عدم وجود مستشعرات"], a:1},
-    {unit:"U1", q:"الاستقلالية في إدارة المهام تعني:", c:["تنفيذ أكثر من مهمة في نفس الوقت دون تداخل","إيقاف كل التطبيقات","حذف الملفات تلقائيًا","تغيير لون الشاشة فقط"], a:0},
-    {unit:"U1", q:"من فوائد الأجهزة الذكية بخصوص البيانات:", c:["حماية وتأمين المعلومات بوسائل مثل كلمة مرور/بصمة","منع النسخ واللصق فقط","إلغاء الإنترنت","إضعاف الخصوصية دائمًا"], a:0},
-    {unit:"U1", q:"IOT اختصار لـ:", c:["Internet Of Things","Things Of Internet","Inside Of Technology","غير ذلك"], a:0},
-    {unit:"U1", q:"تمييز الأجهزة الذكية على الإنترنت يكون عبر:", c:["رقم عشوائي","عنوان IP خاص بكل جهاز","اسم المستخدم فقط","نوع اللون"], a:1},
 
-    // U2 (أمثلة—نفس أسئلتك السابقة: هنا مختصر، انت ما راح تلاحظ فرق بالموقع)
-    {unit:"U2", q:"برنامج Excel Microsoft يُستخدم لـ:", c:["كتابة القصص فقط","إنشاء جداول بيانات إلكترونية ومعالجتها","تصميم ألعاب ثلاثية الأبعاد فقط","تصليح الهاتف"], a:1},
-    {unit:"U2", q:"شريط العنوان (Title Bar) يحتوي على:", c:["اسم البرنامج واسم ورقة العمل وأزرار التحكم وأدوات الوصول السريع","الرسوم فقط","قائمة الصور","الإنترنت"], a:0},
-    {unit:"U2", q:"أمر Save As (حفظ باسم) يُستخدم لـ:", c:["حفظ الملف باسم ومكان جديد أو لأول مرة","حذف الملف","طباعة فقط","فتح المتصفح"], a:0},
-    {unit:"U2", q:"ضمن تبويب Home، أوامر Cut/Copy/Paste تندرج تحت:", c:["Clipboard","Font","Alignment","View"], a:0},
-  ];
+var questions = [
+{
+q:"ما هو نظام التشغيل الخاص بأجهزة Apple؟",
+choices:["Android","iOS","Windows","Linux"],
+answer:1
+},
+{
+q:"IOT تعني:",
+choices:["Internet Of Things","Inside Of Technology","Item Of Tool","None"],
+answer:0
+},
+{
+q:"برنامج Excel يستخدم لـ:",
+choices:["تصميم الألعاب","إنشاء جداول بيانات","تحرير الفيديو","تصفح الانترنت"],
+answer:1
+},
+{
+q:"امتداد ملف Excel الحديث هو:",
+choices:[".doc",".xlsx",".jpg",".mp3"],
+answer:1
+},
+{
+q:"عنوان IP يستخدم لـ:",
+choices:["تشغيل الألعاب","تمييز الأجهزة على الشبكة","زيادة السرعة","إطفاء الجهاز"],
+answer:1
+}
+];
 
-  // ⚠️ ملاحظة: إذا تريد “50 سؤال” كاملة مثل النسخة السابقة،
-  // انسخ بنك الأسئلة الكامل من رسالتي السابقة وضعه بدل هذا المختصر (BANK).
-  // الشهادة راح تشتغل تلقائيًا.
+var quizContainer = document.getElementById("quiz");
 
-  const elQ = document.getElementById("questions");
-  const qCount = document.getElementById("qCount");
-  const answered = document.getElementById("answered");
-  const remain = document.getElementById("remain");
-  const resultBox = document.getElementById("resultBox");
-  const scoreLine = document.getElementById("scoreLine");
-  const msgLine = document.getElementById("msgLine");
-  const detailList = document.getElementById("detailList");
-
-  const unitFilter = document.getElementById("unitFilter");
-  const countFilter = document.getElementById("countFilter");
-  const applyBtn = document.getElementById("applyBtn");
-
-  // عناصر الشهادة
-  const certBox = document.getElementById("certBox");
-  const certName = document.getElementById("certName");
-  const certScore = document.getElementById("certScore");
-  const certPercent = document.getElementById("certPercent");
-  const certDate = document.getElementById("certDate");
-
-  let QUIZ = [];
-
-  function shuffle(arr){
-    const a = arr.slice();
-    for(let i=a.length-1;i>0;i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [a[i],a[j]]=[a[j],a[i]];
+function loadQuiz(){
+  for(var i=0;i<questions.length;i++){
+    var qDiv=document.createElement("div");
+    qDiv.className="question";
+    qDiv.innerHTML="<h3>"+(i+1)+"- "+questions[i].q+"</h3>";
+    
+    for(var j=0;j<questions[i].choices.length;j++){
+      qDiv.innerHTML += 
+      "<label><input type='radio' name='q"+i+"' value='"+j+"'> "+
+      questions[i].choices[j]+"</label><br>";
     }
-    return a;
+    quizContainer.appendChild(qDiv);
   }
+}
 
-  function buildQuiz(){
-    const u = unitFilter.value;
-    const n = Number(countFilter.value);
+function submitQuiz(){
+  var score=0;
 
-    let pool = (u==="all") ? BANK : BANK.filter(x=>x.unit===u);
-    pool = shuffle(pool).slice(0, Math.min(n, pool.length));
-
-    QUIZ = pool.map((item, idx) => ({...item, id: idx}));
-    render();
-  }
-
-  function render(){
-    elQ.innerHTML = "";
-    QUIZ.forEach((item, idx) => {
-      const box = document.createElement("div");
-      box.className = "q";
-      box.innerHTML = `
-        <div class="qTop">
-          <h3>${idx+1}) ${item.q}</h3>
-          <span class="chip">${item.unit==="U1" ? "الوحدة 1" : "الوحدة 2"}</span>
-        </div>
-        <div class="opts">
-          ${item.c.map((choice,i)=>`
-            <label>
-              <input type="radio" name="q${idx}" value="${i}" />
-              <span>${choice}</span>
-            </label>
-          `).join("")}
-        </div>
-        <div class="feedback" id="fb${idx}"></div>
-      `;
-      elQ.appendChild(box);
-    });
-
-    qCount.textContent = QUIZ.length;
-    resultBox.style.display = "none";
-    certBox.style.display = "none";
-    detailList.innerHTML = "";
-    updateProgress();
-  }
-
-  function getAnswers(){
-    return QUIZ.map((_, idx) => {
-      const picked = document.querySelector(`input[name="q${idx}"]:checked`);
-      return picked ? Number(picked.value) : null;
-    });
-  }
-
-  function updateProgress(){
-    const ans = getAnswers();
-    const done = ans.filter(v=>v!==null).length;
-    answered.textContent = done;
-    remain.textContent = QUIZ.length - done;
-  }
-
-  document.addEventListener("change", (e)=>{
-    if(e.target && e.target.matches('input[type="radio"]')){
-      updateProgress();
-      resultBox.style.display = "none";
-      certBox.style.display = "none";
-      QUIZ.forEach((_, i)=>{
-        const fb = document.getElementById("fb"+i);
-        if(fb) fb.style.display = "none";
-      });
+  for(var i=0;i<questions.length;i++){
+    var selected=document.querySelector("input[name='q"+i+"']:checked");
+    if(selected && parseInt(selected.value)===questions[i].answer){
+      score++;
     }
-  });
-
-  function formatDate(){
-    const d = new Date();
-    const yyyy = d.getFullYear();
-    const mm = String(d.getMonth()+1).padStart(2,"0");
-    const dd = String(d.getDate()).padStart(2,"0");
-    return `${yyyy}-${mm}-${dd}`;
   }
 
-  document.getElementById("submitBtn").addEventListener("click", ()=>{
-    const name = (document.getElementById("studentName").value || "").trim();
-    const ans = getAnswers();
-    const done = ans.filter(v=>v!==null).length;
+  document.getElementById("result").innerHTML=
+  "درجتك: "+score+" / "+questions.length;
+}
 
-    if(done < QUIZ.length){
-      resultBox.style.display = "block";
-      scoreLine.textContent = `لازم تجاوب كل الأسئلة: ${done}/${QUIZ.length}`;
-      msgLine.textContent = "كمل الباقي وبعدين اضغط عرض النتيجة.";
-      detailList.innerHTML = "";
-      certBox.style.display = "none";
-      return;
-    }
+loadQuiz();
 
-    let score = 0;
-    detailList.innerHTML = "";
-
-    ans.forEach((a, idx)=>{
-      const ok = a === QUIZ[idx].a;
-      if(ok) score++;
-
-      const fb = document.getElementById("fb"+idx);
-      const correctText = QUIZ[idx].c[QUIZ[idx].a];
-      fb.style.display = "block";
-      fb.innerHTML = ok
-        ? `✅ <span class="ok">صح</span> — ممتاز`
-        : `❌ <span class="no">خطأ</span> — الصحيح: <b style="color:var(--accent)">${correctText}</b>`;
-
-      const li = document.createElement("li");
-      li.innerHTML = `سؤال ${idx+1}: ${ok ? '<span class="ok">صح</span>' : '<span class="no">خطأ</span>'}
-      — الصحيح: ${correctText}`;
-      detailList.appendChild(li);
-    });
-
-    const percent = Math.round((score / QUIZ.length) * 100);
-    resultBox.style.display = "block";
-
-    const titleName = name ? `الطالب: ${name} — ` : "";
-    scoreLine.textContent = `${titleName}درجتك: ${score}/${QUIZ.length} (${percent}%)`;
-
-    msgLine.textContent =
-      percent >= 90 ? "ممتاز جدًا! أداء قوي 👏"
-      : percent >= 70 ? "جيد جدًا، بس راجع كم نقطة 👍"
-      : percent >= 50 ? "مقبول، يحتاج مراجعة أكثر 🙂"
-      : "لا بأس—راجع الوحدة وجرب مرة ثانية 💪";
-
-    // ===== تعبئة الشهادة وإظهارها =====
-    certBox.style.display = "block";
-    certName.textContent = name ? name : "—";
-    certScore.textContent = `${score} / ${QUIZ.length}`;
-    certPercent.textContent = `${percent}%`;
-    certDate.textContent = `التاريخ: ${formatDate()}`;
-
-    window.location.hash = "#certificate";
-  });
-
-  document.getElementById("resetBtn").addEventListener("click", ()=>{
-    document.querySelectorAll('input[type="radio"]').forEach(r=> r.checked=false);
-    resultBox.style.display = "none";
-    certBox.style.display = "none";
-    detailList.innerHTML = "";
-    QUIZ.forEach((_, i)=>{
-      const fb = document.getElementById("fb"+i);
-      if(fb) fb.style.display = "none";
-    });
-    updateProgress();
-    window.scrollTo({top:0, behavior:"smooth"});
-  });
-
-  document.getElementById("printBtn").addEventListener("click", ()=> window.print());
-
-  applyBtn.addEventListener("click", ()=>{
-    buildQuiz();
-    window.scrollTo({top:0, behavior:"smooth"});
-  });
-
-  buildQuiz();
 </script>
+
 </body>
 </html>
