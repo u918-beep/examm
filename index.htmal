@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مدرسة السيّاب | موقع رسمي</title>
+  <meta name="description" content="موقع بسيط وأنيق لمدرسة السيّاب" />
+  <style>
+    :root{
+      --bg:#0b0d10;
+      --card:#11151b;
+      --muted:#8ea0b5;
+      --text:#e9eef5;
+      --line:#1e2631;
+      --accent:#7c8796;
+      --accent2:#c6ccd6;
+      --shadow: 0 12px 30px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(198,204,214,.12), transparent 55%),
+                  radial-gradient(900px 450px at 10% 0%, rgba(124,135,150,.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1100px; margin:0 auto; padding:22px}
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,13,16,.72);
+      border-bottom:1px solid rgba(30,38,49,.7);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      padding:12px 0;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(198,204,214,.22), rgba(124,135,150,.18));
+      border:1px solid rgba(198,204,214,.22);
+      box-shadow: var(--shadow);
+    }
+    .brand h1{font-size:16px; margin:0; letter-spacing:.2px}
+    .brand p{margin:0; font-size:12px; color:var(--muted)}
+    .links{display:flex; gap:10px; flex-wrap:wrap}
+    .pill{
+      padding:10px 12px;
+      border:1px solid rgba(30,38,49,.9);
+      background: rgba(17,21,27,.65);
+      border-radius:999px;
+      font-size:13px;
+      color:var(--accent2);
+      transition: .2s ease;
+    }
+    .pill:hover{transform: translateY(-1px); border-color: rgba(198,204,214,.25)}
+    .hero{padding:28px 0 8px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 880px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(17,21,27,.85), rgba(17,21,27,.60));
+      border:1px solid rgba(30,38,49,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .headline{
+      font-size:34px; margin:0 0 10px; line-height:1.1;
+      letter-spacing: .3px;
+    }
+    .sub{
+      color:var(--muted);
+      margin:0 0 16px;
+      font-size:14px;
+      line-height:1.9;
+    }
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+    .btn{
+      border-radius: 14px;
+      padding:12px 14px;
+      border:1px solid rgba(198,204,214,.22);
+      background: rgba(198,204,214,.10);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:600;
+      transition:.2s ease;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(198,204,214,.14)}
+    .btn.secondary{
+      border-color: rgba(30,38,49,.9);
+      background: rgba(17,21,27,.55);
+      color: var(--accent2);
+    }
+    .stats{
+      display:grid; grid-template-columns: repeat(3,1fr);
+      gap:10px; margin-top:14px;
+    }
+    @media (max-width: 520px){
+      .stats{grid-template-columns:1fr}
+    }
+    .mini{
+      padding:12px;
+      border-radius: 16px;
+      border:1px solid rgba(30,38,49,.9);
+      background: rgba(11,13,16,.25);
+    }
+    .mini b{display:block; font-size:16px; margin-bottom:4px}
+    .mini span{color:var(--muted); font-size:12px}
+    section{padding:14px 0}
+    .sectionTitle{margin:0 0 10px; font-size:18px}
+    .two{
+      display:grid; grid-template-columns:1fr 1fr; gap:16px;
+    }
+    @media (max-width: 880px){
+      .two{grid-template-columns:1fr}
+    }
+    ul{margin:10px 0 0; padding:0 18px; color:var(--muted); line-height:1.9}
+    .footer{
+      border-top:1px solid rgba(30,38,49,.7);
+      color:var(--muted);
+      padding:18px 0 40px;
+      margin-top:18px;
+      font-size:13px;
+    }
+    .toast{
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      max-width: 520px;
+      margin: 0 auto;
+      background: rgba(17,21,27,.92);
+      border: 1px solid rgba(30,38,49,.9);
+      border-radius: 16px;
+      padding: 12px 14px;
+      display:none;
+      box-shadow: var(--shadow);
+      color: var(--accent2);
+      font-size: 13px;
+    }
+    .row{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .x{
+      background:transparent; border:0; color:var(--muted);
+      cursor:pointer; font-size:16px;
+    }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(30,38,49,.9);
+      background: rgba(11,13,16,.35);
+      color: var(--accent2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>مدرسة السيّاب</h1>
+          <p>موقع رسمي — نسخة تجريبية</p>
+        </div>
+      </div>
+
+      <nav class="links" aria-label="روابط">
+        <a class="pill" href="#about">عن المدرسة</a>
+        <a class="pill" href="#news">الإعلانات</a>
+        <a class="pill" href="#contact">تواصل</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="grid">
+        <div class="card">
+          <h2 class="headline">موقع أنيق وجاهز للاستخدام 👌</h2>
+          <p class="sub">
+            هذا قالب بسيط (صفحة واحدة) يشتغل فورًا على أي جهاز.
+            إذا تريد أحوّله لموقع اختبارات للطلاب أو تضيف صفحات إضافية، أرتبه لك بنفس الشكل.
+          </p>
+
+          <div class="ctaRow">
+            <button class="btn" id="btnToast">عرض رسالة</button>
+            <a class="btn secondary" href="#about">خلّ نشوف المحتوى</a>
+          </div>
+
+          <div class="stats" aria-label="معلومات سريعة">
+            <div class="mini"><b>سريع</b><span>يفتح بدون تعقيد</span></div>
+            <div class="mini"><b>أنيق</b><span>أسود/رمادي مرتب</span></div>
+            <div class="mini"><b>جاهز للنشر</b><span>ينرفع بأي استضافة</span></div>
+          </div>
+        </div>
+
+        <aside class="card">
+          <h3 class="sectionTitle">ماذا تريد تسوي بهذا الموقع؟</h3>
+          <ul>
+            <li>موقع تعريفي للمدرسة</li>
+            <li>صفحة إعلانات ونتائج</li>
+            <li>منصة اختبارات (أسئلة + درجات)</li>
+          </ul>
+          <p class="sub" style="margin-top:12px">
+            إذا تكتبلي “أريده اختبار” رح أحوّله لك مباشرة لصفحة أسئلة مع تصحيح تلقائي.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="two">
+        <div class="card">
+          <h3 class="sectionTitle">عن المدرسة</h3>
+          <p class="sub">
+            اكتب هنا نبذة قصيرة عن مدرسة السيّاب: موقعها، رؤيتها، وأهدافها.
+            تقدر تغيّر النص بأي وقت.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="sectionTitle">خدمات الموقع</h3>
+          <ul>
+            <li>واجهة رئيسية جميلة</li>
+            <li>قسم إعلانات</li>
+            <li>قسم تواصل</li>
+            <li>إمكانية إضافة صفحات بسهولة</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="news">
+      <div class="card">
+        <h3 class="sectionTitle">الإعلانات</h3>
+        <ul>
+          <li>📌 إعلان 1: اكتب إعلانك هنا</li>
+          <li>📌 إعلان 2: جدول الامتحانات / نشاط / تنبيه</li>
+          <li>📌 إعلان 3: أي تحديثات للطلاب</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="two">
+        <div class="card">
+          <h3 class="sectionTitle">تواصل</h3>
+          <p class="sub">بدّل البيانات حسب المدرسة:</p>
+          <ul>
+            <li>الهاتف: 0000-000-000</li>
+            <li>البريد: school@example.com</li>
+            <li>العنوان: بغداد - العراق</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="sectionTitle">ملاحظة</h3>
+          <p class="sub">
+            هذا الموقع يشتغل كـ <span class="kbd">index.html</span> فقط.
+            يعني ما يحتاج قاعدة بيانات ولا إعدادات.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      © <span id="year"></span> مدرسة السيّاب — تم التصميم بأسلوب بسيط وأنيق.
+    </div>
+  </main>
+
+  <div class="toast" id="toast">
+    <div class="row">
+      <div>✅ الموقع شغال! إذا تريد أنشره برابط مباشر قلّي “نشر”</div>
+      <button class="x" id="closeToast" aria-label="إغلاق">✕</button>
+    </div>
+  </div>
+
+  <script>
+    // سنة تلقائيًا
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Toast
+    const toast = document.getElementById("toast");
+    document.getElementById("btnToast").addEventListener("click", () => {
+      toast.style.display = "block";
+      clearTimeout(window.__t);
+      window.__t = setTimeout(()=> toast.style.display="none", 4000);
+    });
+    document.getElementById("closeToast").addEventListener("click", () => {
+      toast.style.display = "none";
+    });
+  </script>
+</body>
+</html>
